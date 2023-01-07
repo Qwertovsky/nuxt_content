@@ -72,11 +72,6 @@ export async function parse (file: string, userOptions: Partial<MarkdownOptions>
     ? await generateBody(excerptString, { ...options, data })
     : undefined
 
-  /**
-   * Process content headings
-   */
-  const heading = contentHeading(body)
-
   return <{ meta: Partial<MarkdownParsedContent>, body: MarkdownParsedContent['body'] }> {
     body: {
       ...body,
@@ -84,8 +79,6 @@ export async function parse (file: string, userOptions: Partial<MarkdownOptions>
     },
     meta: {
       _empty: content.trim().length === 0,
-      title: heading.title,
-      description: heading.description,
       excerpt,
       ...data
     }
