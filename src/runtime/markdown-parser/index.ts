@@ -67,7 +67,10 @@ export async function parse (file: string, userOptions: Partial<MarkdownOptions>
     toc = generateToc(body, tocOption)
   }
 
-  const excerptString = useExcerpt(content)
+  let excerptString = useExcerpt(content)
+  if (!excerptString) {
+    excerptString = data.description
+  }
   const excerpt = excerptString
     ? await generateBody(excerptString, { ...options, data })
     : undefined
